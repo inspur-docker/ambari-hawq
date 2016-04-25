@@ -4,4 +4,8 @@ FROM incloud/ambari-hawq
 RUN yum -y groupinstall chinese-support
 COPY i18n /etc/sysconfig/
 
+
+#clean yum cache
+RUN yum clean all
+
 WORKDIR /

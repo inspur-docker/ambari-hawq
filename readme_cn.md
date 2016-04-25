@@ -63,8 +63,28 @@ repo/目录下的文件使用了本地资源库，需根据环境调整。
 
 hawq rpm包下载自https://network.pivotal.io/products/pivotal-hdb#/releases/1503/file_groups/380，并制作本地repo资源库。
 
-# 生产环节部署
+# 生产环境部署
 主要解决hadoop、hawq、ambari数据持久化的问题。可使用`--volume`容器启动参数来绑定本地主机目录。
+策略如下：
+
+## 1.Hadoop数据
+
+Namenode 持久化方案：a.固定在指定的主机 b.使用分布式存储。
+
+Datanode持久化方案：直接绑定主机目录。
+
+## 2.Ambari
+Ambari Server元数据： a.固定在指定主机 b.使用分布式存储。
+
+Ambari agent 数据： 不需要持久化？
+
+## 3.hawq
+Master元数据：a.固定在指定主机 b.使用分布式存储。
+
+Slave：不需要持久化？
+
+## compose编排参考
+
 
 
   [docker-dns-gen]: https://github.com/jiadexin/docker-dns-gen
