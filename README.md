@@ -29,6 +29,9 @@ or pull：
     $ cd deploy/multi
     $ docker-compose up -d
 
+# all in one deploy
+
+
 
 # create hadoop cluster
 

@@ -7,8 +7,8 @@ RUN cd /opt/PIVOTAL-HDB/ && cat hawq-2.0.0.0_beta-21030.x86_64.rpm.a* > hawq-2.0
 COPY PIVOTAL-HDB/*.repo /etc/yum.repos.d/
 
 #-------------install hadoop_2.3 && hawq && depends
-COPY repo-local/* /etc/yum.repos.d/
-#COPY repo-origin/* /etc/yum.repos.d/
+#COPY repo-local/* /etc/yum.repos.d/
+COPY repo-origin/* /etc/yum.repos.d/
 RUN yum -y install unzip hdp-select rpcbind 'hadoop_2_3_*' snappy snappy-devel ntp hawq
 
 #-----------install ambari-server (all in one)
