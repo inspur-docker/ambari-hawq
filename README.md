@@ -7,6 +7,15 @@ Bug fixes : rename hawq services script "constants.py -> hawqconstants.py"
 
 more detail -> [chinese readme]
 
+# Get Hawq RPM
+from :
+
+    https://network.pivotal.io/products/pivotal-hdb。
+
+or
+
+    ./PIVOTAL-HDB/
+
 # Get image
 build :
 
