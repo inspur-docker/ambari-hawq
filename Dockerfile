@@ -2,6 +2,8 @@ FROM incloud/ambari-agent
 
 #-------------local hawq rpm repo
 ADD PIVOTAL-HDB /opt/PIVOTAL-HDB/
+#
+RUN cd /opt/PIVOTAL-HDB/ && cat hawq-2.0.0.0_beta-21030.x86_64.rpm.a* > hawq-2.0.0.0_beta-21030.x86_64.rpm && rm -f hawq-2.0.0.0_beta-21030.x86_64.rpm.a*
 COPY PIVOTAL-HDB/*.repo /etc/yum.repos.d/
 
 #-------------install hadoop_2.3 && hawq && depends
@@ -22,6 +24,6 @@ COPY hawq/ambari/services/PXF/* /var/lib/ambari-server/resources/stacks/HDP/2.3/
 COPY hawq/ambari/repoinfo.xml /var/lib/ambari-server/resources/stacks/HDP/2.3/repos/
 
 #clean yum cache
-#RUN yum clean all
+RUN yum clean all
 
 WORKDIR /
