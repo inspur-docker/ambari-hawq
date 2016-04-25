@@ -1,0 +1,132 @@
+{
+  "Blueprints": {
+    "blueprint_name": "bp-for-hawq-multi",
+    "stack_name": "HDP",
+    "stack_version": "2.3"
+  },
+  "host_groups": [
+    {
+      "name": "master",
+      "components": [
+        {
+          "name": "NAMENODE"
+        },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name": "HAWQMASTER"
+        },
+        {
+          "name": "HAWQSEGMENT"
+        },
+        {
+          "name": "PXF"
+        }
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "standby",
+      "components": [
+        {
+          "name": "SECONDARY_NAMENODE"
+        },
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name": "HAWQSEGMENT"
+        },
+        {
+          "name": "HAWQSTANDBY"
+        },
+        {
+          "name": "PXF"
+        }
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "slave",
+      "components": [
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name": "HAWQSEGMENT"
+        },
+        {
+          "name": "PXF"
+        }
+      ],
+      "cardinality": "+1"
+    }
+  ],
+  "configurations": [
+    {
+      "hdfs-site": {
+        "dfs.allow.truncate": "true",
+        "dfs.block.access.token.enable": "false",
+        "dfs.block.local-path-access.user": "gpadmin",
+        "dfs.client.read.shortcircuit": "true",
+        "dfs.client.use.legacy.blockreader.local": "false",
+        "dfs.support.append": "true",
+        "dfs.replication": "3",
+        "dfs.permissions": "false",
+        "dfs.permissions.enabled": "false",
+        "dfs.client.socket-timeout": "300000000",
+        "dfs.datanode.handler.count": "60",
+        "dfs.datanode.socket.write.timeout": "7200000",
+        "dfs.namenode.handler.count": "600",
+        "dfs.namenode.datanode.registration.ip-hostname-check":"false"
+      }
+    },
+    {
+      "core-site": {
+        "ipc.client.connection.maxidletime": "3600000",
+        "ipc.client.connect.timeout": "300000",
+        "ipc.server.listen.queue.size": "3300"
+      }
+    },
+    {
+      "hawq-site": {
+        "hawq_rm_yarn_address": "hawq-master:8050",
+        "hawq_rm_yarn_scheduler_address": "hawq-master:8030",
+        "dfs.default.replica": "3",
+        "hawq_re_memory_overcommit_max":"1024"
+      }
+    },
+    {
+      "hawq-sysctl-env": {
+        "net.ipv4.ip_forward": "1"
+      }
+    },
+    {
+      "gpcheck": {
+        "content": "[global]\nconfigfile_version = 4\n\n[linux.mount]\n#mount.points = /\n\n[linux.sysctl]\nsysctl.kernel.shmmax = 500000000\nsysctl.kernel.shmmni = 4096\nsysctl.kernel.shmall = 4000000000\nsysctl.kernel.sem = 250 512000 100 2048\nsysctl.kernel.sysrq = 1\nsysctl.kernel.core_uses_pid = 1\nsysctl.kernel.msgmnb = 65536\nsysctl.kernel.msgmax = 65536\nsysctl.kernel.msgmni = 2048\n\n[linux.limits]\n#soft.nofile = 2900000\n#hard.nofile = 2900000\n#soft.nproc  = 131072\n#hard.nproc  = 131072\n\n[linux.diskusage]\ndiskusage.monitor.mounts = /\ndiskusage.monitor.usagemax = 90%\n\n[hdfs]\ndfs.mem.namenode.heap = 40960\ndfs.mem.datanode.heap = 6144\n# in hdfs-site.xml\ndfs.support.append = true\ndfs.client.enable.read.from.local = true\ndfs.block.local-path-access.user = gpadmin\ndfs.datanode.max.transfer.threads = 40960\ndfs.client.socket-timeout = 300000000\ndfs.datanode.socket.write.timeout = 7200000\ndfs.namenode.handler.count = 60\nipc.server.handler.queue.size = 3300\ndfs.datanode.handler.count = 60\nipc.client.connection.maxidletime = 3600000\ndfs.namenode.accesstime.precision = -1\n"
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "Blueprints": {
+    "blueprint_name": "bp-for-hawq",
+    "stack_name": "HDP",
+    "stack_version": "2.3"
+  },
+  "host_groups": [
+    {
+      "name": "all-in-one",
+      "components": [
+        {
+          "name": "NAMENODE"
+        },
+        {
+          "name": "SECONDARY_NAMENODE"
+        },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name": "HAWQMASTER"
+        },
+        {
+          "name": "HAWQSEGMENT"
+        },
+        {
+          "name": "HAWQSTANDBY"
+        },
+        {
+          "name": "PXF"
+        }
+      ],
+      "cardinality": "1"
+    }
+  ],
+  "configurations": [
+    {
+      "hdfs-site": {
+        "dfs.allow.truncate": "true",
+        "dfs.block.access.token.enable": "false",
+        "dfs.block.local-path-access.user": "gpadmin",
+        "dfs.client.read.shortcircuit": "true",
+        "dfs.client.use.legacy.blockreader.local": "false",
+        "dfs.support.append": "true",
+        "dfs.replication": "1",
+        "dfs.permissions": "false",
+        "dfs.permissions.enabled": "false",
+        "dfs.client.socket-timeout": "300000000",
+        "dfs.datanode.handler.count": "60",
+        "dfs.datanode.socket.write.timeout": "7200000",
+        "dfs.namenode.handler.count": "600"
+      }
+    },
+    {
+      "core-site": {
+        "ipc.client.connection.maxidletime": "3600000",
+        "ipc.client.connect.timeout": "300000",
+        "ipc.server.listen.queue.size": "3300"
+      }
+    },
+    {
+      "hawq-site": {
+        "hawq_rm_yarn_address": "hawq-master:8032",
+        "hawq_rm_yarn_scheduler_address": "hawq-master:8030",
+        "dfs.default.replica": "1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+[HDP-UTILS-1.1.0.20]
+name=HDP-UTILS-1.1.0.20
+baseurl=http://10.110.17.155/insight/HDP-UTILS-1.1.0.20/
+
+path=/
+enabled=1
+gpgcheck=0

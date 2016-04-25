@@ -1,0 +1,4 @@
+#LANG="zh_CN.UTF-8"
+LANG="en_US.UTF-8"
+SUPPORTED="zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en"
+SYSFONT="latarcyrheb-sun16"

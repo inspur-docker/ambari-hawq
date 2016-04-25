@@ -1,0 +1,45 @@
+ambari-server:
+    image: incloud/ambari-hawq:zh_CN
+    ports:
+        - "8080:8080"
+    volumes:
+        - .:/opt/ambari-hadoop
+    command: ["/start-server.sh","setup"]
+    dns_search: docker
+    hostname: ambariserver
+hawq-master:
+    image: incloud/ambari-hawq:zh_CN
+    privileged: true
+    #links: #使用dns-gen
+    #    - ambari-server:ambari-server
+    volumes:
+        - .:/opt/ambari-hawq
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /var/run/docker.sock:/var/run/docker.sock
+    command: ["/start-agent.sh","reset","ambariserver"]
+    dns_search: docker
+    hostname: hawqmaster
+    environment:
+       HADOOP_ROLE: "master"
+    labels:
+       hadoop.role: "slave"
+hawq-slave1:
+    image: incloud/ambari-hawq:zh_CN
+    privileged: true
+    volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+    command: ["/start-agent.sh","reset","ambariserver"]
+    dns_search: docker
+    hostname: hawqslave1
+    labels:
+       hadoop.role: "slave"
+hawq-slave2:
+    image: incloud/ambari-hawq:zh_CN
+    privileged: true
+    volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+    command: ["/start-agent.sh","reset","ambariserver"]
+    dns_search: docker
+    hostname: hawqslave2
+    labels:
+       hadoop.role: "slave"

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<reposinfo>
+    <os family="redhat6">
+        <repo>
+            <baseurl>http://10.110.17.155/insight/HDP-2.3.4.0/</baseurl>
+            <repoid>HDP-2.3</repoid>
+            <reponame>HDP</reponame>
+        </repo>
+        <repo>
+            <baseurl>http://10.110.17.155/insight/HDP-UTILS-1.1.0.20/</baseurl>
+            <repoid>HDP-UTILS-1.1.0.20</repoid>
+            <reponame>HDP-UTILS</reponame>
+        </repo>
+        <repo>
+            <baseurl>http://10.110.17.155/insight/PIVOTAL-HDB/</baseurl>
+            <repoid>PIVOTAL-HDB</repoid>
+            <reponame>PIVOTAL-HDB</reponame>
+        </repo>
+    </os>
+</reposinfo>

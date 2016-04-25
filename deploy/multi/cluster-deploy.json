@@ -1,0 +1,30 @@
+{
+  "blueprint": "bp-for-hawq-multi",
+  "default_password": "root",
+  "host_groups": [
+    {
+      "name": "master",
+      "hosts": [
+        {
+          "fqdn": "hawqmaster"
+        }
+      ]
+    },
+    {
+      "name": "standby",
+      "hosts": [
+        {
+          "fqdn": "hawqslave1"
+        }
+      ]
+    },
+    {
+      "name": "slave",
+      "hosts": [
+        {
+          "fqdn": "hawqslave2"
+        }
+      ]
+    }
+  ]
+}

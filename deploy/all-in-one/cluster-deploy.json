@@ -1,0 +1,14 @@
+{
+  "blueprint": "bp-for-hawq",
+  "default_password": "root",
+  "host_groups": [
+    {
+      "name": "all-in-one",
+      "hosts": [
+        {
+          "fqdn": "hawq-master"
+        }
+      ]
+    }
+  ]
+}

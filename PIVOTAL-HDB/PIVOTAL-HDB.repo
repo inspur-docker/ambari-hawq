@@ -1,0 +1,4 @@
+[PIVOTAL-HDB]
+name=PIVOTAL-HDB
+baseurl=file:///opt/PIVOTAL-HDB/
+gpgcheck=0
