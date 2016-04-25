@@ -29,9 +29,6 @@ or pull：
     $ cd deploy/multi
     $ docker-compose up -d
 
-# all in one deploy
-
-
 
 # create hadoop cluster
 
@@ -61,5 +58,10 @@ in container:
              select * from my_table;
              insert into my_table values(3,'three');
 
+
+# all in one deploy
+
+
+# production deploy
 
  [chinese readme]: /readme_cn.md

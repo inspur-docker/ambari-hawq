@@ -1,29 +1,20 @@
-or-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42919868">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <o
+<repomd xmlns="http://linux.duke.edu/metadata/repo">
+  <data type="other">
+    <location href="repodata/other.xml.gz"/>
+    <checksum type="sha">dffa9e00edb8e394ef7e2fd97c8ec35208696710</checksum>
+    <timestamp>1458719052</timestamp>
+    <open-checksum type="sha">736861eda016762123dc5a7c36f58e7517ea2be7</open-checksum>
+  </data>
+  <data type="filelists">
+    <location href="repodata/filelists.xml.gz"/>
+    <checksum type="sha">77fb669d1b892404db8e171b7c5b1abc56ec922d</checksum>
+    <timestamp>1458719052</timestamp>
+    <open-checksum type="sha">d2f1a837e0068dbafc788237bddd602f1bcc8aaa</open-checksum>
+  </data>
+  <data type="primary">
+    <location href="repodata/primary.xml.gz"/>
+    <checksum type="sha">fbd3d45eea25228d345750981d881d93ef5f5f6d</checksum>
+    <timestamp>1458719052</timestamp>
+    <open-checksum type="sha">d9ca9b08c9b3a256a257b5d83c2171db8cf2dcd9</open-checksum>
+  </data>
+</repomd>

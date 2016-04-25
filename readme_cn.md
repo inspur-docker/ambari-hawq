@@ -63,6 +63,10 @@ repo/目录下的文件使用了本地资源库，需根据环境调整。
 
 hawq rpm包下载自https://network.pivotal.io/products/pivotal-hdb#/releases/1503/file_groups/380，并制作本地repo资源库。
 
+# 生产环节部署
+主要解决hadoop、hawq、ambari数据持久化的问题。可使用`--volume`容器启动参数来绑定本地主机目录。
+
+
   [docker-dns-gen]: https://github.com/jiadexin/docker-dns-gen
   [ambari-docker]: https://github.com/inspur-docker/ambari-docker
   [zhcn/Dockerfile]: zhcn/Dockerfile
