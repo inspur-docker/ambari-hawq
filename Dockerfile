@@ -19,7 +19,7 @@ COPY hawq/ambari/services/PXF/* /var/lib/ambari-server/resources/stacks/HDP/2.3/
 #-------------install hadoop_2.3 && hawq PXF && depends
 #COPY repo-local/* /etc/yum.repos.d/
 COPY repo-origin/* /etc/yum.repos.d/
-RUN yum clean && yum -y install unzip hdp-select rpcbind 'hadoop_2_3_*' snappy snappy-devel ntp hawq pxf-service  apache-tomcat pxf-hdfs pxf-hive pxf-hbase
+RUN yum clean all && yum -y install unzip hdp-select rpcbind 'hadoop_2_3_*' snappy snappy-devel ntp hawq pxf-service  apache-tomcat pxf-hdfs pxf-hive pxf-hbase
 #RUN useradd pxf && useradd tomcat
 #/etc/pxf/conf/pxf-env.sh
 
