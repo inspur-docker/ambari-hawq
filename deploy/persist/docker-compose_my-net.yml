@@ -1,0 +1,81 @@
+ambari-server:
+    image: incloud/ambari-hawq:patch
+    ports:
+        - "8080:8080"
+    privileged: true
+    volumes:
+        - /mnt/hgfs/hadoop-w/docker:/share
+        #持久化数据目录
+        - /data/psql/:/var/lib/pgsql/data/
+        #- /data/jia1/keys/:/var/lib/ambari-server/keys/
+    command: ["/start-server.sh","setup"]
+    net: my-net
+    dns_search: docker
+    hostname: ambariserver
+    environment:
+       - "constraint:role==master"
+       #- "constraint: nodename==jia1"
+hawq-master: #run on jia1
+    image: incloud/ambari-hawq:patch
+    ports:
+        - "50070:50070"
+        - "8670:8670"
+    privileged: true
+    volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /root/.docker/machine/machines/jia1:/jia1-cert
+        - /mnt/hgfs/hadoop-w/docker:/share
+        #持久化数据目录
+        - /data/jia1/hdfs/:/hadoop/hdfs/
+        - /data/jia1/hawq/:/data/hawq/
+        - /data/jia1/zookeeper/:/hadoop/zookeeper/
+    command: ["/start-agent.sh","reset","ambariserver"]
+    net: my-net
+    dns_search: docker
+    hostname: hawqmaster
+    environment:
+       - "constraint:role==master"
+       - HADOOP_ROLE=master
+       - DOCKER_CERT_PATH=/jia1-cert
+       - DOCKER_TLS_VERIFY=1
+       - DOCKER_URI=tcp://192.168.200.11:3376
+    labels:
+       hadoop.role: "slave"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+hawq-slave1:
+    image: incloud/ambari-hawq:patch
+    ports:
+        - "8670:8670"
+    privileged: true
+    volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /mnt/hgfs/hadoop-w/docker:/share
+        #持久化数据目录
+        - /data/slave1/hdfs/:/hadoop/hdfs/
+        - /data/slave1/hawq/:/data/hawq/
+    command: ["/start-agent.sh","reset","ambariserver"]
+    net: my-net
+    dns_search: docker
+    #dns: 192.168.200.11
+    hostname: hawqslave1
+    labels:
+       hadoop.role: "slave"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+hawq-slave2:
+    extends:
+      service: hawq-slave1
+    hostname: hawqslave2
+#    environment:
+#       constraint: "nodename==jia3"
+    volumes:
+        - /data/slave2/hdfs/:/hadoop/hdfs/
+        - /data/slave2/hawq/:/data/hawq/
+#可以用命令扩展：docker-compose scale hawq-slave=2 #问题：hostname都是相同的

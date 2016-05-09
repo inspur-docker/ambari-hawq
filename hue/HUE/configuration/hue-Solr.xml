@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  <property>
+    <name>content</name>
+    <description>configuration for hue (hue.ini): Pig</description>
+    <value>
+###########################################################################
+# Settings to configure Solr Search
+###########################################################################
+
+[search]
+
+  # URL of the Solr Server
+  ## solr_url=http://localhost:8983/solr/
+
+  # Requires FQDN in solr_url if enabled
+  ## security_enabled=false
+
+  ## Query sent when no term is entered
+  ## empty_query=*:*
+
+  # Use latest Solr 5.2+ features.
+  ## latest=true
+
+
+###########################################################################
+# Settings to configure Solr API lib
+###########################################################################
+
+[libsolr]
+
+  # Choose whether Hue should validate certificates received from the server.
+  ## ssl_cert_ca_verify=true
+
+
+###########################################################################
+# Settings to configure Solr Indexer
+###########################################################################
+
+[indexer]
+
+  # Location of the solrctl binary.
+  ## solrctl_path=/usr/bin/solrctl
+
+    </value>
+  </property>  
+     
+</configuration>
+

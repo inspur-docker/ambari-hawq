@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  <property>
+    <name>content</name>
+    <description>configuration for hue (hue.ini): notebook</description>
+    <value>
+###########################################################################
+# Settings to configure the snippets available in the Notebook
+###########################################################################
+
+[notebook]
+
+  ## Base URL to Remote GitHub Server
+  # github_remote_url=https://github.com
+
+  ## Base URL to GitHub API
+  # github_api_url=https://api.github.com
+
+  ## Client ID for Authorized GitHub Application
+  # github_client_id=
+
+  ## Client Secret for Authorized GitHub Application
+  # github_client_secret=
+
+  # One entry for each type of snippet. The first 5 will appear in the wheel.
+  [[interpreters]]
+    # Define the name and how to connect and execute the language.
+
+    [[[hive]]]
+      # The name of the snippet.
+      name=Hive
+      # The backend connection to use to communicate with the server.
+      interface=hiveserver2
+
+    #[[[impala]]]
+    #  name=Impala
+    #  interface=hiveserver2
+
+    [[[sparksql]]]
+      name=SparkSql
+      interface=hiveserver2
+
+    [[[spark]]]
+      name=Scala
+      interface=livy
+
+    [[[pyspark]]]
+      name=PySpark
+      interface=livy
+
+    [[[r]]]
+      name=R
+      interface=livy
+
+    [[[jar]]]
+      name=Spark Submit Jar
+      interface=livy-batch
+
+    [[[py]]]
+      name=Spark Submit Python
+      interface=livy-batch
+
+    [[[pig]]]
+      name=Pig
+      interface=pig
+
+    [[[text]]]
+      name=Text
+      interface=text
+
+    [[[markdown]]]
+      name=Markdown
+      interface=text
+
+    [[[mysql]]]
+      name = MySQL
+      interface=rdbms
+
+    [[[sqlite]]]
+      name = SQLite
+      interface=rdbms
+
+    [[[postgresql]]]
+      name = PostgreSQL
+      interface=rdbms
+
+    [[[oracle]]]
+      name = Oracle
+      interface=rdbms
+
+    # [[[mysql]]]
+    #   name=MySql JDBC
+    #   interface=jdbc
+    #   ## Specific options for connecting to the server.
+    #   ## The JDBC connectors, e.g. mysql.jar, need to be in the CLASSPATH environment variable.
+    #   ## If 'user' and 'password' are omitted, they will be prompted in the UI.
+    #   options='{"url": "jdbc:mysql://localhost:3306/hue", "driver": "com.mysql.jdbc.Driver", "user": "root", "password": "root"}'
+
+  ## Main flag to override the automatic starting of the DBProxy server.
+  # enable_dbproxy_server=true
+    </value>
+  </property>  
+     
+</configuration>
+

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  <property>
+    <name>content</name>
+    <description>configuration for hue (hue.ini): Oozie</description>
+    <value>
+###########################################################################
+# Settings to configure the Oozie app
+###########################################################################
+
+[oozie]
+  # Location on local FS where the examples are stored.
+  ## local_data_dir=/usr/local/hue/apps/oozie/examples
+
+  # Location on local FS where the data for the examples is stored.
+  ## sample_data_dir=/usr/local/hue/apps/oozie/examples/input_data
+
+  # Location on HDFS where the oozie examples and workflows are stored.
+  ## remote_data_dir=/user/hue/oozie/workspaces
+
+  # Maximum of Oozie workflows or coodinators to retrieve in one API call.
+  ## oozie_jobs_count=50
+
+  # Use Cron format for defining the frequency of a Coordinator instead of the old frequency number/unit.
+  ## enable_cron_scheduling=true
+
+###########################################################################
+# Settings to configure liboozie
+###########################################################################
+
+[liboozie]
+  # The URL where the Oozie service runs on. This is required in order for
+  # users to submit jobs. Empty value disables the config check.
+  ## oozie_url=http://localhost:11000/oozie
+
+  # Requires FQDN in oozie_url if enabled
+  ## security_enabled=false
+
+  # Location on HDFS where the workflows/coordinator are deployed when submitted.
+  ## remote_deployement_dir=/user/hue/oozie/deployments
+
+    </value>
+  </property>  
+     
+</configuration>
+

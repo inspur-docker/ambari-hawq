@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- This is a special config file for properties used to monitor status of the service -->
+<configuration>
+
+  <property>
+    <name>hue_pid_dir</name>
+    <value>/var/run/hue</value>
+    <description>Hue Process ID Directory</description>
+  </property> 
+ 
+  <property>
+    <name>hue.log.dir</name>
+    <value>/var/log/hue</value>
+    <description>Dir for Hue log</description>
+  </property> 
+  
+  <property>
+    <name>hue.user</name>
+    <value>hue</value>
+    <property-type>USER</property-type>
+    <description>Hue user</description>
+  </property>  
+
+  <property>
+    <name>hue.group</name>
+    <value>hue</value>
+    <property-type>GROUP</property-type>
+    <description>Hue group</description>
+  </property> 
+  
+  <property>
+    <name>hue.port</name>
+    <value>8888</value>
+    <description>Hue port</description>
+  </property>
+
+</configuration>  

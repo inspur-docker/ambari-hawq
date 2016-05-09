@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  <property>
+    <name>content</name>
+    <description>configuration for hue (hue.ini): Spark</description>
+    <value>
+###########################################################################
+# Settings to configure the Spark application.
+###########################################################################
+
+[spark]
+  # Host address of the Livy Server.
+  ## livy_server_host=localhost
+
+  # Port of the Livy Server.
+  ## livy_server_port=8998
+
+  # Configure livy to start in local 'process' mode, or 'yarn' workers.
+  ## livy_server_session_kind=yarn
+
+  # If livy should use proxy users when submitting a job.
+  ## livy_impersonation_enabled=true
+
+  # Host of the Sql Server
+  ## sql_server_host=localhost
+
+  # Port of the Sql Server
+  ## sql_server_port=10002
+
+    </value>
+  </property>  
+     
+</configuration>
+

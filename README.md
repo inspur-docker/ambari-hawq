@@ -58,8 +58,12 @@ in container:
              select * from my_table;
              insert into my_table values(3,'three');
 
+# chinese support for hawq
+
+    docker pull  incloud/ambari-hawq:zh_CN
 
 # all in one deploy
+
 
 
 # production deploy

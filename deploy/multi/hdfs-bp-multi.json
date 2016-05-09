@@ -1,0 +1,90 @@
+{
+  "Blueprints": {
+    "blueprint_name": "hdfs-bp-multi",
+    "stack_name": "HDP",
+    "stack_version": "2.3"
+  },
+  "host_groups": [
+    {
+      "name": "master",
+      "components": [
+        {
+          "name": "NAMENODE"
+        },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        }
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "standby",
+      "components": [
+        {
+          "name": "SECONDARY_NAMENODE"
+        },
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        }
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "slave",
+      "components": [
+        {
+          "name": "DATANODE"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        }
+      ],
+      "cardinality": "+1"
+    }
+  ],
+  "configurations": [
+    {
+      "hdfs-site": {
+        "dfs.allow.truncate": "true",
+        "dfs.block.access.token.enable": "false",
+        "dfs.block.local-path-access.user": "gpadmin",
+        "dfs.client.read.shortcircuit": "true",
+        "dfs.client.use.legacy.blockreader.local": "false",
+        "dfs.support.append": "true",
+        "dfs.replication": "3",
+        "dfs.permissions": "false",
+        "dfs.permissions.enabled": "false",
+        "dfs.client.socket-timeout": "300000000",
+        "dfs.datanode.handler.count": "60",
+        "dfs.datanode.socket.write.timeout": "7200000",
+        "dfs.namenode.handler.count": "600",
+        "dfs.namenode.datanode.registration.ip-hostname-check":"false"
+      }
+    },
+    {
+      "core-site": {
+        "ipc.client.connection.maxidletime": "3600000",
+        "ipc.client.connect.timeout": "300000",
+        "ipc.server.listen.queue.size": "3300"
+      }
+    }
+  ]
+}

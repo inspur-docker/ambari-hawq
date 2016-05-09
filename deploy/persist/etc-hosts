@@ -1,0 +1,7 @@
+127.0.0.1      localhost
+192.168.200.20 ambariserver
+192.168.200.21 hmaster
+192.168.200.22 hsecond
+192.168.200.23 hwork1
+192.168.200.24 hwork2
+192.168.200.25 hwork3
