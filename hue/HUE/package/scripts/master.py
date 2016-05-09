@@ -38,14 +38,34 @@ class Master(Script):
     
     Execute('find ' + params.service_packagedir + ' -iname "*.sh" | xargs chmod +x')
 
+    Execute('echo Hue dir: ' + params.hue_dir)
+    #Execute('cd ' + params.hue_install_dir + '; rm -rf hue*')
+    #Execute('cd ' + params.hue_install_dir + '; cat /etc/yum.repos.d/HD.repo | grep "baseurl" | awk -F \'=\' \'{print $2"hue/hue-3.9.tgz"}\' | xargs wget -O hue.tgz -a ' + params.hue_log)
+    #Execute('cd ' + params.hue_install_dir + '; tar -zxvf hue.tgz')
+    #Execute('cd ' + params.hue_install_dir + '; rm -rf hue.tgz')
+
+    #config
+    configure(env)
+
+    Execute ('echo "Hue install complete"')
+
+
+
+  def configure(self, env):
+    import params
+    import status_params
+    env.set_params(params)
+
+    #---------------------move from install()-----------
+
     try: grp.getgrnam(params.hue_group)
-    except KeyError: Group(group_name=params.hue_group) 
-    
+    except KeyError: Group(group_name=params.hue_group)
+
     try: pwd.getpwnam(params.hue_user)
     except KeyError: User(username=params.hue_user,
                           gid=params.hue_group,
                           groups=[params.hue_group],
-                          ignore_failures=True)    
+                          ignore_failures=True)
     Directory([params.hue_log_dir, status_params.hue_piddir],
               mode=0755,
               cd_access='a',
@@ -59,29 +79,18 @@ class Master(Script):
          group=params.hue_group,
          content=''
          )
-
-    Execute('echo Hue dir: ' + params.hue_dir)
-    #Execute('cd ' + params.hue_install_dir + '; rm -rf hue*')
-    #Execute('cd ' + params.hue_install_dir + '; cat /etc/yum.repos.d/HD.repo | grep "baseurl" | awk -F \'=\' \'{print $2"hue/hue-3.9.tgz"}\' | xargs wget -O hue.tgz -a ' + params.hue_log)
-    #Execute('cd ' + params.hue_install_dir + '; tar -zxvf hue.tgz')
-    Execute(format("ln -s {hue_dir}/desktop/libs/hadoop/java-lib/hue-plugins-3.9.0-SNAPSHOT.jar /usr/hdp/current/hadoop-client/lib"), ignore_failures=True)
-    #Execute('cd ' + params.hue_install_dir + '; rm -rf hue.tgz')
-    Execute('cd ' + params.hue_install_dir + '; ln -s hue* latest', user=params.hue_user)
-    if params.hue_bindir == 'UNDEFINED':
-      Execute('echo Error: hue_bin: ' + params.hue_bindir)
-        
     #ensure all Hue files owned by hue
     Execute('chown -R ' + params.hue_user + ':' + params.hue_group + ' ' + params.hue_dir)
-    #add environment variable
-    Execute(format("{service_packagedir}/scripts/add_env_variable.sh"), ignore_failures=True)   
-    Execute ('echo "Hue install complete"')
+
+    Execute(format("ln -s {hue_dir}/desktop/libs/hadoop/java-lib/hue-plugins-3.9.0-SNAPSHOT.jar /usr/hdp/current/hadoop-client/lib"), ignore_failures=True)
+    #Execute('cd ' + params.hue_install_dir + '; ln -s hue* latest', user=params.hue_user)
+    if params.hue_bindir == 'UNDEFINED':
+      Execute('echo Error: hue_bin: ' + params.hue_bindir)
+    #add environment variable()
+    Execute(format("{service_packagedir}/scripts/add_env_variable.sh"), ignore_failures=True)
+    #---------------------move from install()  END.-----------
 
 
-
-  def configure(self, env):
-    import params
-    env.set_params(params)
-    
     Execute (format("mkdir {hue_eachconf}; rm -rf {hue_conf}/hue.ini"), user=params.hue_user) 
 
     log_content=InlineTemplate(params.hue_log_content)    
