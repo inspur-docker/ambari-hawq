@@ -45,7 +45,7 @@ class Master(Script):
     #Execute('cd ' + params.hue_install_dir + '; rm -rf hue.tgz')
 
     #config
-    configure(env)
+    self.configure(env)
 
     Execute ('echo "Hue install complete"')
 
