@@ -3,23 +3,24 @@ ambariserver:
     ports:
         - "8080:8080"
     privileged: true
-    net: none
+    #net: none
     volumes:
         - /mnt/hgfs/hadoop-w/docker:/share
         #持久化数据目录
         - /data/psql/:/var/lib/pgsql/data/
         #- /data/jia1/keys/:/var/lib/ambari-server/keys/
-        - ./etc-hosts:/etc/hosts
+        #- ./etc-hosts:/etc/hosts
     command: ["/start-server.sh","setup"]
     dns_search: docker
     hostname: ambariserver
     environment:
+       - HADOOP_ROLE=master
        #- "constraint:role==master"
        - "constraint:nodename==jia1"
 hmaster: #run on jia1
     image: incloud/ambari-hawq:patch
     privileged: true
-    net: none
+    #net: none
     volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
         - /root/.docker/machine/machines/jia1:/jia1-cert
@@ -28,7 +29,7 @@ hmaster: #run on jia1
         - /data/hmaster/hdfs/:/hadoop/hdfs/
         - /data/hmaster/hawq/:/data/hawq/
         - /data/hmaster/zookeeper/:/hadoop/zookeeper/
-        - ./etc-hosts:/etc/hosts
+        #- ./etc-hosts:/etc/hosts
     command: ["/start-agent.sh","reset","ambariserver"]
     dns_search: docker
     hostname: hmaster
@@ -38,7 +39,7 @@ hmaster: #run on jia1
        - HADOOP_ROLE=master
        - DOCKER_CERT_PATH=/jia1-cert
        - DOCKER_TLS_VERIFY=1
-       - DOCKER_URI=tcp://192.168.200.11:3376
+       - DOCKER_URI=tcp://192.168.200.128:3376
     labels:
        hadoop.role: "slave"
     ulimits:
@@ -52,7 +53,7 @@ hsecond: #run on jia1
     hostname: hsecond
     environment:
        - "constraint:nodename==jia1"
-       - HADOOP_ROLE=slave
+       - HADOOP_ROLE=master
     volumes:
         #持久化数据目录
         - /data/hsecond/hdfs/:/hadoop/hdfs/

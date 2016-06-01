@@ -207,6 +207,21 @@ PXF也需要增加用户，否则启动时有错误：
 ## compose编排参考
 
 
+# 自定义网桥
+DOCKER主机A：
+
+    --fixed-cidr=192.168.200.128/26
+    地址范围;128-190
+DOCKER主机B：
+
+    --fixed-cidr=192.168.200.192/27
+    地址范围;192-222
+DOCKER主机C：
+
+    --fixed-cidr=192.168.200.224/27
+    地址范围;224-254
+
+
 
   [docker-dns-gen]: https://github.com/jiadexin/docker-dns-gen
   [ambari-docker]: https://github.com/inspur-docker/ambari-docker

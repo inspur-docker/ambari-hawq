@@ -30,11 +30,11 @@ RUN mkdir /usr/java && ln -s /opt/java/jdk1.8.0_60 /usr/java/default
 RUN useradd -p '$6$04ecjJSX$fWelhVL1H1wJB0AR.OCcv.qthmhHVDLYvkZw8qW05kNFaoSFFEMDzjci2gniDN2ndCy3TBqOHoC91vK9eh.S/0' gpadmin && su -c "ssh-keygen -q -f /home/gpadmin/.ssh/id_rsa -N ''" gpadmin && rm -f /home/gpadmin/.ssh/*
 
 #-------------install HUE && HUE service
-RUN yum -y install wget tar asciidoc krb5-devel cyrus-sasl-gssapi cyrus-sasl-devel libxml2-devel libxslt-devel libtidy mysql mysql-devel openldap-devel python-devel python-simplejson python-setuptools sqlite-devel gcc gcc-c++ rsync saslwrapper-devel pycrypto gmp-devel libyaml-devel cyrus-sasl-plain cyrus-sasl-devel cyrus-sasl-gssapi postgresql-devel python-psycopg2
+#RUN yum -y install wget tar asciidoc krb5-devel cyrus-sasl-gssapi cyrus-sasl-devel libxml2-devel libxslt-devel libtidy mysql mysql-devel openldap-devel python-devel python-simplejson python-setuptools sqlite-devel gcc gcc-c++ rsync saslwrapper-devel pycrypto gmp-devel libyaml-devel cyrus-sasl-plain cyrus-sasl-devel cyrus-sasl-gssapi postgresql-devel python-psycopg2
 #COPY hue/hue-3.9.tgz /usr/local/
-RUN wget -O /usr/local/hue-3.9.tgz https://dl.dropboxusercontent.com/u/730827/hue/releases/3.9.0/hue-3.9.0.tgz
-RUN cd /usr/local/ && tar -zxf hue-3.9.tgz && rm -rf hue-3.9.tgz
-COPY hue/HUE/ /var/lib/ambari-server/resources/stacks/HDP/2.3/services/HUE/
+#RUN wget -O /usr/local/hue-3.9.tgz https://dl.dropboxusercontent.com/u/730827/hue/releases/3.9.0/hue-3.9.0.tgz
+#RUN cd /usr/local/ && tar -zxf hue-3.9.tgz  && rm -rf hue-3.9.tgz && mv hue-3.9.0 hue
+#COPY hue/HUE/ /var/lib/ambari-server/resources/stacks/HDP/2.3/services/HUE/
 
 COPY *.sh /
 RUN chmod +x /*.sh

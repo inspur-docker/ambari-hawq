@@ -1,0 +1,66 @@
+ambariserver:
+    image: incloud/ambari-hawq:zh_CN
+    ports:
+        - "8080:8080"
+    privileged: true
+    volumes:
+        - /opt/ambari-hawq:/share
+    command: ["/start-server.sh","setup"]
+    net: my-net
+    dns_search: docker
+    hostname: ambariserver
+    environment:
+       - "constraint: nodename==jia1"
+hmaster: #run on jia1
+    image: incloud/ambari-hawq:zh_CN
+    ports:
+        - "50070:50070"
+    privileged: true
+    volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+        - /root/.docker/machine/machines/jia1:/jia1-cert
+        - /opt/ambari-hawq:/share
+    command: ["/start-agent.sh","reset","ambariserver"]
+    net: my-net
+    dns_search: docker
+    hostname: hmaster
+    environment:
+       - "constraint: nodename==jia1"
+       - HADOOP_ROLE=master
+       - DOCKER_CERT_PATH=/jia1-cert
+       - DOCKER_TLS_VERIFY=1
+       - DOCKER_URI=tcp://10.110.17.21:3376
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+hsecond: #run on jia1
+    extends:
+       service: hmaster
+    hostname: hsecond
+    environment:
+       - "constraint:nodename==jia1"
+       - HADOOP_ROLE=master
+hwork1:
+    extends:
+       service: hmaster
+    hostname: hwork1
+    environment:
+       - "constraint:nodename==jia1"
+       - HADOOP_ROLE=slave
+hwork2:
+    extends:
+       service: hmaster
+    hostname: hwork2
+    environment:
+       - "constraint:nodename==jia2"
+       - HADOOP_ROLE=slave
+hwork3:
+    extends:
+       service: hmaster
+    hostname: hwork3
+    environment:
+       - "constraint:nodename==jia3"
+       - HADOOP_ROLE=slave
+#可以用命令扩展：docker-compose scale hwork=2 #问题：hostname都是相同的

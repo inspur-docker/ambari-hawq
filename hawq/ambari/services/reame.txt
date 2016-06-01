@@ -1,2 +1,0 @@
-ambari-server的目录
-/var/lib/ambari-server/resources/stacks/HDP/2.3/services
