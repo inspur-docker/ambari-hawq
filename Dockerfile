@@ -1,7 +1,7 @@
 FROM incloud/ambari-agent
 
 #-----------install ambari-server (all in one)
-RUN yum -y install ambari-server
+RUN yum clean all && yum -y install ambari-server
 
 #-------------local hawq rpm repo
 ADD PIVOTAL-HDB /opt/PIVOTAL-HDB/
